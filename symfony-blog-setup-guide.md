@@ -1,3 +1,12 @@
+# Migration Note
+
+If you enable Twig extra extensions (markdown, cssinliner, inky) by default in your config, you must require the corresponding packages:
+
+```
+composer require twig/markdown-extra twig/cssinliner-extra twig/inky-extra
+```
+
+If you do not require these, keep the config defaults as disabled (false).
 
 # Symfony Blog Project Setup & Security Guide (Ordered by Actual Workflow)
 
@@ -18,25 +27,29 @@ cd symfony-blog
   docker compose up -d
   ```
 
-
 ## 3. Configure .env and Secure .env.dev.local
 
 - Edit `.env` to set your `DATABASE_URL` (example for MySQL):
+
   ```env
+
 DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/symfony_blog?serverVersion=8.0.32&charset=utf8mb4"
-  ```
 
 - Create `.env.dev.local` (not committed to git):
+  
   ```env
+
 APP_SECRET=your_random_secret_key
-  ```
+
+```
+
+
 
 - Generate a secure key:
   ```bash
   php -r "echo bin2hex(random_bytes(16));"
   ```
 
-- Ensure `.env.dev.local` is in `.gitignore`.
 - Ensure `.env.dev.local` is in `.gitignore`.
 
 ## 4. Create Database and Run Migrations
@@ -83,11 +96,14 @@ php bin/console doctrine:migrations:migrate
 ## 8. Commit Your Work
 
 After each major step, commit your changes. For example, after your initial setup:
+
 ```bash
 git add .
 git commit -m "Initial Symfony blog setup"
 ```
+
 For later changes, use descriptive commit messages:
+
 ```bash
 git add .
 git commit -m "Describe your change"

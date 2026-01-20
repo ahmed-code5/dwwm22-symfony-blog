@@ -109,35 +109,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
-     * Also store the original password hash under a separate key for unserialization.
      *
      * @return array
      */
     public function __serialize(): array
     {
         $data = (array) $this;
-        // Store the original password hash under a separate key
-        $data["\0" . self::class . "\0original_password"] = $this->password;
         // Overwrite the password property with a CRC32C hash for session storage
         $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
         return $data;
-    }
-
-    /**
-     * Restore the original password hash after unserialization.
-     *
-     * @param array $data
-     * @return void
-     */
-    public function __unserialize(array $data): void
-    {
-        foreach ($data as $key => $value) {
-            if ($key === "\0" . self::class . "\0original_password") {
-                $this->password = $value;
-            } elseif ($key !== "\0" . self::class . "\0password") {
-                $this->$key = $value;
-            }
-        }
     }
 
     /**
