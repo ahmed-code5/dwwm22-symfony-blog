@@ -41,12 +41,16 @@
         "symfony/validator": "8.0.*",
         "symfony/web-link": "8.0.*",
         "symfony/yaml": "8.0.*",
+        "twig/cssinliner-extra": "^3.22",
         "twig/extra-bundle": "^2.12|^3.0",
+        "twig/inky-extra": "^3.22",
+        "twig/markdown-extra": "^3.22",
         "twig/twig": "^2.12|^3.0"
     },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
+            "phpstan/extension-installer": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
@@ -99,6 +103,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.92",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.5",
         "symfony/browser-kit": "8.0.*",
         "symfony/css-selector": "8.0.*",
